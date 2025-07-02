@@ -12,6 +12,7 @@ def solution(people, limit):
         else:
             h_start+=1
             count+=1
+        # 끝까지 한 사람씩 들어간 경운는 인덱스가 서로 같게 되고 마지막 사람이 count가 안된다. 이 부분은 따로 처리
         if (l_start==h_start):
             count+=1
     
