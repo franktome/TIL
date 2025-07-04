@@ -1,19 +1,18 @@
 
-def dfs(visited,n,full,lst):
+def dfs(n,full,lst):
     global full_lst
     if len(lst)==n:
         full_lst.append(lst)
         return
     for i in range(5):
-        dfs(visited,n,full,lst+full[i])
+        dfs(n,full,lst+full[i]) # 중복 허욜이기 때문에 따로 visited는 관리하지 않음
 
 full_lst=[]  
 
 def solution(word):
     global full_lst
-    visited = [0]*5
     for i in range(1,6):
-        dfs(visited,i,"AEIOU","")
+        dfs(i,"AEIOU","")
     final_lst = list(set(full_lst))
     final_lst.sort()
     print(final_lst[:10])
