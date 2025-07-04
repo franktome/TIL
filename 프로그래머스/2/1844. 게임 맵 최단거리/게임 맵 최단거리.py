@@ -3,6 +3,8 @@ from collections import deque
 def bfs(m,n, maps, distances, queue):
     while queue:
         x,y = queue.popleft()
+        if x==m-1 and y==n-1:
+            return
         for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
             nx = x + dx
             ny = y + dy
