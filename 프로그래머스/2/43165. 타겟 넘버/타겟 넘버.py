@@ -1,20 +1,18 @@
-def solution(numbers, target):
-    answer = 0
-    
-    def dfs(i, value):
-        # nonlocal 개념 처음 알아간다.
-        nonlocal answer
-        if i==len(numbers):
-            if value==target:
+from collections import deque
+
+def bfs(numbers, target):
+    q= deque([(0,0)])
+    answer=0
+    while q:
+        current_sum, index = q.popleft()
+        
+        if index == len(numbers):
+            if current_sum==target:
                 answer+=1
-            return
-        for j in (0,1):
-            if i < len(numbers):
-                # value를 다시 원래대로 되돌려야 하네
-                temp = value
-                value = value + numbers[i] if j==0 else value + (-1)*numbers[i]
-                dfs(i+1,value)
-                value = temp
-                
-    dfs(0,0)
+        else:
+            q.append((current_sum + numbers[index], index+1))
+            q.append((current_sum - numbers[index], index+1))
     return answer
+                
+def solution(numbers, target):
+    return bfs(numbers, target)
