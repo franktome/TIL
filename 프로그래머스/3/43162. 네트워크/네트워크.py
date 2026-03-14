@@ -1,15 +1,20 @@
-def dfs(x,visited, n, computers):
-    visited[x] = True
-    for i in range(n):
-        if visited[i]==False and computers[x][i]==1:
-            dfs(i,visited,n, computers)
-    
+from collections import deque
 
+def bfs(start,visited,n,computers):
+    q = deque([start])
+    visited[start]=True
+    while q:
+        network = q.popleft()
+        for index, value in enumerate(computers[network]):
+            if visited[index]==False and value==1:
+                q.append(index)
+                visited[index]=True
+        
 def solution(n, computers):
     answer = 0
-    visited = n*[False]
+    visited = [False]*n
     for i in range(n):
         if visited[i]==False:
-            dfs(i, visited,n, computers)
+            bfs(i, visited, n, computers)
             answer+=1
     return answer
